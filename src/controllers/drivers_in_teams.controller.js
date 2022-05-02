@@ -1,13 +1,31 @@
 const db = require('../database');
 
+/* QUE RESPONDER EN EL JSON EN CASO DE EXITO DE CREATE - UPDATE - DELETE
+    COMO VALIDAR QUE ESTAN FUNCIONANDO TANTO CREATE COMO UPDATE O DELETE?? ES 
+    DECIR, VALIDAR QUE LO QUE VIENE EN BODY SEA LO QUE SE NECESITA
+*/
+
 const getDriversInTeams = async (req, res) => {
     const response = await db.query('SELECT * FROM drivers_in_teams');
-    res.status(200).json(response.rows);
+
+    if (response.rows.length > 0 ){
+        res.status(200).json(response.rows);
+    }else {
+        res.status(404).json({error: 'not found.'});
+    }
 }
 
 const getDriversInTeamByTeamId = async (req, res) => {
-    const response = await db.query('SELECT * FROM drivers_in_teams WHERE team_id = $1',[req.params.id]);
-    res.status(200).json(response.rows);
+    if (isNaN([req.params.id])){
+        res.status(400).json({error: 'parameter not valid.'}); 
+    }else{
+        const response = await db.query('SELECT * FROM drivers_in_teams WHERE team_id = $1',[req.params.id]);
+        if (response.rows.length > 0 ){
+            res.status(200).json(response.rows[0]);
+        }else {
+            res.status(404).json({error: 'not found.'});
+        }
+    }
 }
 
 const createDriversInTeam = async (req, res) => {
@@ -17,23 +35,32 @@ const createDriversInTeam = async (req, res) => {
         driver_1_id, 
         driver_2_id
     ]);
-    res.status(200).json(response.rows);
+    res.status(200).json(response.rows);//que responder en el create en caso de exito
+    //como validar los errores posibles (body invalido)
 }
 
 const updateDriversInTeam = async (req, res) => {
-    const {team_id, driver_1_id, driver_2_id} = req.body;
-    const response = await db.query('UPDATE drivers_in_teams SET team_id = $1, driver_1_id = $2, driver_2_id = $3 WHERE id = $4', [
-        team_id, 
-        driver_1_id, 
-        driver_2_id, 
-        req.params.id
-    ]);
-    res.status(200).json(response.rows);
+    if (isNaN([req.params.id])){
+        res.status(400).json({error: 'parameter not valid.'}); 
+    }else{
+        const {team_id, driver_1_id, driver_2_id} = req.body;
+        const response = await db.query('UPDATE drivers_in_teams SET team_id = $1, driver_1_id = $2, driver_2_id = $3 WHERE id = $4', [
+            team_id, 
+            driver_1_id, 
+            driver_2_id, 
+            req.params.id
+        ]);
+        res.status(200).json(response.rows);
+    }
 }
 
 const deleteDriversInTeam = async (req, res) => {
-    const response = await db.query('DELETE FROM drivers_in_teams WHERE id = $1',[req.params.id]);
-    res.status(200).json(response.rows);
+    if (isNaN([req.params.id])){
+        res.status(400).json({error: 'parameter not valid.'}); 
+    }else{
+        const response = await db.query('DELETE FROM drivers_in_teams WHERE id = $1',[req.params.id]);
+        res.status(200).json(response.rows);
+    }
 }
 
 module.exports = {
