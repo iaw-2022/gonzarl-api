@@ -7,7 +7,6 @@ const driversInTeamsRoutes = require('./routes/drivers_in_teams.routes');
 const app = express();
 
 //middlewares
-app.use(cors());
 app.use(express.json());
 
 //routes
