@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const teamsRoutes = require('./routes/teams.routes');
 const driversInTeamsRoutes = require('./routes/drivers_in_teams.routes');
 
