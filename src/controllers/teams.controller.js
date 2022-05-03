@@ -12,7 +12,7 @@ const getTeams = async (req, res) => {
 
 const getTeamById = async (req, res) => {
     if (isNaN([req.params.id])){
-        res.status(400).json({error: 'parameter not valid.'}); 
+        res.status(400).json({error: 'invalid parameter.'}); 
     }else{
         const response = await db.query('SELECT * FROM TEAMS WHERE id = $1',[req.params.id]);
         if (response.rows.length > 0 ){

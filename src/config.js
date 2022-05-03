@@ -1,7 +1,10 @@
+require('dotenv').config();
+
 module.exports = {
-    PORT: 5000,
-    DB_HOST: 'localhost',
-    DB_USER: 'postgres',
-    DB_DATABASE: 'testdb',
-    DB_PASSWORD: 'preinfa2013',
+    PORT: process.env.PORT,
+    DB_HOST: process.env.PORT,
+    DB_USER: process.env.DB_USER,
+    DB_DATABASE: process.env.DB_DATABASE,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    SERVER: process.env.SERVER,
 }

@@ -3,6 +3,7 @@ const db = require('../database');
 /* QUE RESPONDER EN EL JSON EN CASO DE EXITO DE CREATE - UPDATE - DELETE
     COMO VALIDAR QUE ESTAN FUNCIONANDO TANTO CREATE COMO UPDATE O DELETE?? ES 
     DECIR, VALIDAR QUE LO QUE VIENE EN BODY SEA LO QUE SE NECESITA
+    CAMEL CASE EN VARIABLES ??
 */
 
 const getDriversInTeams = async (req, res) => {
@@ -38,7 +39,7 @@ const createDriversInTeam = async (req, res) => {
         ]);
         res.status(201).json({success: 'true'});
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'creation failed',
             description: err.message, 
         }); 
@@ -61,7 +62,7 @@ const updateDriversInTeam = async (req, res) => {
             res.status(200).json({success: 'true'});
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'update failed',
             description: err.message, 
         }); 
@@ -77,7 +78,7 @@ const deleteDriversInTeam = async (req, res) => {
             res.status(200).json({success: 'true'});
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'delete failed',
             description: err.message, 
         }); 
