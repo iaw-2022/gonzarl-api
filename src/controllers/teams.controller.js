@@ -25,8 +25,8 @@ const getTeamById = async (req, res) => {
 
 const createTeam = async (req, res) => {
     try{
-        const {name, user_id} = req.body;
-        const response = await db.query('INSERT INTO teams (name, user_id) VALUES ($1, $2)', [name, user_id]);
+        const {name, userId} = req.body;
+        const response = await db.query('INSERT INTO teams (name, user_id) VALUES ($1, $2)', [name, userId]);
         res.status(201).json({success: 'true'});
     }catch(err){
         res.status(400).json({
