@@ -10,11 +10,11 @@ const getTeams = async (req, res) => {
     }
 }
 
-const getTeamById = async (req, res) => {
+const getTeamByUserId = async (req, res) => {
     if (isNaN([req.params.id])){
         res.status(400).json({error: 'invalid parameter.'}); 
     }else{
-        const response = await db.query('SELECT * FROM TEAMS WHERE id = $1',[req.params.id]);
+        const response = await db.query('SELECT * FROM TEAMS WHERE user_id = $1',[req.params.id]);
         if (response.rows.length > 0 ){
             res.status(200).json(response.rows[0]);
         }else {
@@ -54,7 +54,7 @@ const deleteTeam = async (req, res) => {
 
 module.exports = {
     getTeams,
-    getTeamById,
+    getTeamByUserId,
     createTeam,
     deleteTeam
 }
