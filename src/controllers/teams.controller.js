@@ -36,6 +36,24 @@ const createTeam = async (req, res) => {
     }
 }
 
+const updateTeamName = async (req, res) => {
+    try{
+        if (isNaN([req.params.id])){
+            res.status(400).json({error: 'parameter not valid.'}); 
+        }else{
+            const {name} = req.body;
+            const response = await db.query(
+                'UPDATE teams SET name = $1 WHERE id = $2', [name, req.params.id]);
+            res.status(200).json({success: 'true'});
+        }
+    }catch(err){
+        res.status(404).json({
+            error: 'update failed',
+            description: err.message, 
+        }); 
+    }
+}
+
 const deleteTeam = async (req, res) => {
     try{
         if (isNaN([req.params.id])){
@@ -56,5 +74,6 @@ module.exports = {
     getTeams,
     getTeamByUserId,
     createTeam,
+    updateTeamName,
     deleteTeam
 }

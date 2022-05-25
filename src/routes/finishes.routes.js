@@ -16,8 +16,7 @@ const finishesController = require('../controllers/finishes.controller.js');
  *       '404':
  *         description: Not found
  */
-router.get('/', finishesController.getRaces);
-
+router.get('/', finishesController.getFinishes);
 /**
  * @swagger 
  * /finishes/{race_id}:
@@ -27,7 +26,7 @@ router.get('/', finishesController.getRaces);
  *      - Finishes
  *    parameters:
  *      - in: path
- *        name: id  
+ *        name: race_id  
  *        schema: 
  *          type: integer
  *        required: true

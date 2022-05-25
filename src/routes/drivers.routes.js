@@ -17,4 +17,28 @@ const driversController = require('../controllers/drivers.controller.js');
  *         description: Not found
  */
 router.get('/', driversController.getDrivers);
+/**
+ * @swagger 
+ * /drivers/{driver_id}:
+ *  get: 
+ *    description: use to request a driver.
+ *    tags:
+ *      - Drivers
+ *    parameters:
+ *      - in: path
+ *        name: driver_id  
+ *        schema: 
+ *          type: integer
+ *        required: true
+ *        description: id of the driver
+ *    responses:
+ *      '200':
+ *        description: Successfull response
+ *      '400':
+ *        description: Invalid parameter
+ *      '404':
+ *        description: Not found
+ */
+router.get('/:id', driversController.getDriverById);
+
 module.exports = router;

@@ -1,4 +1,5 @@
 const express = require('express');
+const { requiresAuth } = require('express-openid-connect');
 const router = express.Router();
 
 const driversInTeamsController = require('../controllers/drivers_in_teams.controller.js');
@@ -57,7 +58,7 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *      '404':
  *        description: Creation failed
  */
-router.post('/', driversInTeamsController.createDriversInTeam);
+router.post('/', requiresAuth(), driversInTeamsController.createDriversInTeam);
 /**
  * @swagger 
  * /drivers_in_teams/{id}:
@@ -96,7 +97,7 @@ router.post('/', driversInTeamsController.createDriversInTeam);
  *      '404':
  *        description: Update failed
  */
-router.put('/:id',driversInTeamsController.updateDriversInTeam);
+router.put('/:id', requiresAuth(), driversInTeamsController.updateDriversInTeam);
 /**
  * @swagger 
  * /drivers_in_teams/{id}:
@@ -119,6 +120,6 @@ router.put('/:id',driversInTeamsController.updateDriversInTeam);
  *      '404':
  *        description: Not found
  */
-router.delete('/:id',driversInTeamsController.deleteDriversInTeam);
+router.delete('/:id', requiresAuth(), driversInTeamsController.deleteDriversInTeam);
 
 module.exports = router;
