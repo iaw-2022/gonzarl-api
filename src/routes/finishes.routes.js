@@ -34,9 +34,9 @@ router.get('/', finishesController.getFinishes);
  *    responses:
  *      '200':
  *        description: Successfull response
- *      '400':
- *        description: Invalid parameter
  *      '404':
+ *        description: Invalid parameter
+ *      '405':
  *        description: Not found
  */
 router.get('/:id',finishesController.getFinishesByRaceId);

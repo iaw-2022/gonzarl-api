@@ -3,7 +3,6 @@ const router = express.Router();
 const checkAuth = require('../auth');
 const driversInTeamsController = require('../controllers/drivers_in_teams.controller.js');
 
-router.get('/', driversInTeamsController.getDriversInTeams);
 /**
  * @swagger 
  * /drivers_in_teams/{id}:
@@ -21,9 +20,9 @@ router.get('/', driversInTeamsController.getDriversInTeams);
  *    responses:
  *      '200':
  *        description: Successfull response
- *      '400':
- *        description: Invalid parameter
  *      '404':
+ *        description: Invalid parameter
+ *      '405':
  *        description: Not found
  */
 router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
@@ -55,6 +54,8 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *      '201':
  *        description: Successfull creation
  *      '404':
+ *        description: Invalid parameters.
+ *      '405':
  *        description: Creation failed
  */
 router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
@@ -91,9 +92,9 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *    responses:
  *      '200':
  *        description: Successfull update
- *      '400':
- *        description: Invalid parameter
  *      '404':
+ *        description: Invalid parameters
+ *      '405':
  *        description: Update failed
  */
 router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
@@ -114,9 +115,9 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *    responses:
  *      '200':
  *        description: Successfull response
- *      '400':
- *        description: Invalid parameter
  *      '404':
+ *        description: Invalid parameter
+ *      '405':
  *        description: Not found
  */
 router.delete('/:id', checkAuth, driversInTeamsController.deleteDriversInTeam);

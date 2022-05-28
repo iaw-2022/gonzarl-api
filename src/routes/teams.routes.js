@@ -3,7 +3,6 @@ const router = express.Router();
 const checkAuth = require('../auth');
 const teamsController = require('../controllers/teams.controller.js');
 
-router.get('/', teamsController.getTeams);
 /**
  * @swagger 
  * /teams/{user_id}:
@@ -21,9 +20,9 @@ router.get('/', teamsController.getTeams);
  *    responses:
  *      '200':
  *        description: Successfull response
- *      '400':
- *        description: Invalid parameter
  *      '404':
+ *        description: Invalid parameter
+ *      '405':
  *        description: Not found
  */
 router.get('/:id', teamsController.getTeamByUserId);
@@ -51,7 +50,9 @@ router.get('/:id', teamsController.getTeamByUserId);
  *     responses:
  *       '201':
  *         description: Successfull creation
- *       '400':
+ *       '404':
+ *         description: Invalid parameters
+ *       '405':
  *         description: Creation failed
  */
 router.post('/', checkAuth, teamsController.createTeam);
@@ -81,11 +82,11 @@ router.post('/', checkAuth, teamsController.createTeam);
  *         description: the new name for the team.
  *     responses:
  *       '201':
- *         description: successfull update
- *       '400':
- *         description: invalid team id
+ *         description: Successfull update
  *       '404':
- *         description: update failed
+ *         description: Invalid parameters
+ *       '405':
+ *         description: Update failed
  */
 router.put('/:id', checkAuth, teamsController.updateTeamName);
 /**
@@ -105,9 +106,9 @@ router.put('/:id', checkAuth, teamsController.updateTeamName);
  *    responses:
  *      '200':
  *        description: Successfull response
- *      '400':
- *        description: Invalid parameter
  *      '404':
+ *        description: Invalid parameter
+ *      '405':
  *        description: Not found
  */
 router.delete('/:id', checkAuth, teamsController.deleteTeam);
