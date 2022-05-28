@@ -1,7 +1,6 @@
 const express = require('express');
-const { requiresAuth } = require('express-openid-connect');
 const router = express.Router();
-
+const checkAuth = require('../auth');
 const teamsController = require('../controllers/teams.controller.js');
 
 router.get('/', teamsController.getTeams);
@@ -55,7 +54,7 @@ router.get('/:id', teamsController.getTeamByUserId);
  *       '400':
  *         description: Creation failed
  */
-router.post('/', requiresAuth(), teamsController.createTeam);
+router.post('/', checkAuth, teamsController.createTeam);
 /**
  *  @swagger 
  * /teams/{id}:
@@ -88,7 +87,7 @@ router.post('/', requiresAuth(), teamsController.createTeam);
  *       '404':
  *         description: update failed
  */
-router.post('/:id', requiresAuth(), teamsController.updateTeamName);
+router.put('/:id', checkAuth, teamsController.updateTeamName);
 /**
  * @swagger 
  * /teams/{id}:
@@ -111,6 +110,6 @@ router.post('/:id', requiresAuth(), teamsController.updateTeamName);
  *      '404':
  *        description: Not found
  */
-router.delete('/:id', requiresAuth(), teamsController.deleteTeam);
+router.delete('/:id', checkAuth, teamsController.deleteTeam);
 
 module.exports = router;

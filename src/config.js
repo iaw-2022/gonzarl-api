@@ -8,8 +8,8 @@ module.exports = {
     DB_PASSWORD: process.env.DB_PASSWORD,
     SERVER: process.env.SERVER,
 
-    ISSUER_BASE_URL: process.env.ISSUER_BASE_URL,
-    CLIENT_ID: process.env.CLIENT_ID,
-    BASE_URL: process.env.BASE_URL,
-    SECRET: process.env.SECRET
+    AUTH_JWK_URI: process.env.AUTH_JWK_URI,
+    AUTH_AUDIENCE: process.env.AUTH_AUDIENCE,
+    AUTH_ISSUER: process.env.AUTH_ISSUER,
+    AUTH_ALGORITHM: process.env.AUTH_ALGORITHM,
 }

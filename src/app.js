@@ -25,18 +25,6 @@ app.get('/', (req, res) => {
     })
 });
 
-//auth
-app.use(
-    auth({
-        authRequired: false,
-        auth0Logout: true,      
-        issuerBaseURL: config.ISSUER_BASE_URL,
-        baseURL: config.BASE_URL,
-        clientID: config.CLIENT_ID,
-        secret: config.SECRET
-    })
-  );
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/teams', teamsRoutes);
 app.use('/drivers', driversRoutes);
