@@ -145,6 +145,14 @@ router.get('/points',driversController.getDriversOrderedByPoints);
  *              value:
  *                type: integer
  *                example: 100000
+ *      '400':
+ *        description: Not found
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: not found
  *      '404':
  *        description: Invalid parameter
  *        schema:
@@ -153,14 +161,6 @@ router.get('/points',driversController.getDriversOrderedByPoints);
  *            error:
  *              type: string
  *              example: invalid parameter
- *      '405':
- *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
  */
 router.get('/:id', driversController.getDriverById);
 

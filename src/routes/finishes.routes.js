@@ -120,6 +120,14 @@ router.get('/', finishesController.getFinishes);
  *            driver_10_id:
  *              type: integer
  *              example: 10                 
+ *      '400':
+ *        description: Not found
+ *        schema:
+ *            type: object
+ *            properties:
+ *              error:
+ *                type: string
+ *                example: not found     
  *      '404':
  *        description: Invalid parameter
  *        schema:
@@ -128,14 +136,6 @@ router.get('/', finishesController.getFinishes);
  *            error:
  *              type: string
  *              example: invalid parameter
- *      '405':
- *        description: Not found
- *        schema:
- *            type: object
- *            properties:
- *              error:
- *                type: string
- *                example: not found
  */
 router.get('/:id',finishesController.getFinishesByRaceId);
 module.exports = router;

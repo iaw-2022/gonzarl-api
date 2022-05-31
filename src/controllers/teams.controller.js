@@ -8,7 +8,7 @@ const getTeamByUserId = async (req, res) => {
         if (response.rows.length > 0 ){
             res.status(200).json(response.rows[0]);
         }else {
-            res.status(405).json({error: 'not found.'});
+            res.status(400).json({error: 'not found.'});
         }
     }
 }
@@ -29,7 +29,7 @@ const createTeam = async (req, res) => {
             }); 
         }
     }catch(err){
-        res.status(405).json({
+        res.status(400).json({
             error: 'creation failed'
         }); 
     }
@@ -40,13 +40,18 @@ const updateTeamName = async (req, res) => {
         if (isNaN([req.params.id])){
             res.status(404).json({error: 'parameter not valid.'}); 
         }else{
-            const {name} = req.body;
-            const response = await db.query(
-                'UPDATE teams SET name = $1 WHERE id = $2', [name, req.params.id]);
-            res.status(200).json({success: 'true'});
+            const checkExistsTeam = await db.query('SELECT * FROM TEAMS WHERE id = $1', [req.params.id]);
+            if (checkExistsTeam.rowCount > 0){
+                const {name} = req.body;
+                const response = await db.query(
+                    'UPDATE teams SET name = $1 WHERE id = $2', [name, req.params.id]);
+                res.status(200).json({success: 'true'});
+            } else{
+                res.status(404).json({error: 'parameter not valid.'});   
+            }
         }
     }catch(err){
-        res.status(405).json({
+        res.status(400).json({
             error: 'update failed',
         }); 
     }
@@ -57,13 +62,17 @@ const deleteTeam = async (req, res) => {
         if (isNaN([req.params.id])){
             res.status(404).json({error: 'parameter not valid.'}); 
         }else{
-            const response = await db.query('DELETE FROM TEAMS WHERE id = $1',[req.params.id]);
-            res.status(200).json({success: 'true'});
+            const checkExistsTeam = await db.query('SELECT * FROM TEAMS WHERE id = $1', [req.params.id]);
+            if (checkExistsTeam.rowCount > 0){
+                const response = await db.query('DELETE FROM TEAMS WHERE id = $1',[req.params.id]);
+                res.status(200).json({success: 'true'});
+            }else{
+                res.status(404).json({error: 'parameter not valid.'});
+            }
         }
     }catch(err){
-        res.status(405).json({
+        res.status(400).json({
             error: 'delete failed',
-            description: err.message, 
         }); 
     }
 }

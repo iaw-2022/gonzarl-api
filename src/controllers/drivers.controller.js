@@ -24,12 +24,17 @@ const getDriverById = async (req, res) => {
     if (isNaN([req.params.id])){
         res.status(404).json({error: 'invalid parameter.'}); 
     }else{
-        const response = await db.query('SELECT * FROM DRIVERS WHERE id = $1', [req.params.id]);
+        const checkExistsDriver = await db.query('SELECT * FROM DRIVERS WHERE id = $1', [req.params.id]);
+        if (checkExistsDriver.rowCount > 0){
+            const response = await db.query('SELECT * FROM DRIVERS WHERE id = $1', [req.params.id]);
 
-        if (response.rows.length > 0 ){
-            res.status(200).json(response.rows[0]);
-        }else {
-            res.status(405).json({error: 'not found.'});
+            if (response.rows.length > 0 ){
+                res.status(200).json(response.rows[0]);
+            }else {
+                res.status(400).json({error: 'not found.'});
+            }
+        }else{
+            res.status(404).json({error: 'invalid parameter.'}); 
         }
     }
 }

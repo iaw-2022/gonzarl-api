@@ -36,14 +36,6 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *              type: integer
  *              example: 2
  *      '404':
- *        description: Invalid parameter
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameter
- *      '405':
  *        description: Not found
  *        schema:
  *          type: object
@@ -88,6 +80,14 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *            success:
  *              type: string
  *              example: true
+ *      '400':
+ *        description: Creation failed.
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: creation failed
  *      '401':
  *        description: Invalid token.
  *        schema:
@@ -96,22 +96,6 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *            error:
  *              type: string
  *              example: invalid token
- *      '404':
- *        description: Invalid parameters.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameters
- *      '405':
- *        description: Creation failed
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: creation failed
  */
 router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
 /**
@@ -152,6 +136,14 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *            success:
  *              type: string
  *              example: true
+ *      '400':
+ *        description: Update failed
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: update failed
  *      '401':
  *        description: Invalid token.
  *        schema:
@@ -168,14 +160,6 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *            error:
  *              type: string
  *              example: invalid parameters
- *      '405':
- *        description: Update failed
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: update failed
  */
 router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
 /**
@@ -203,6 +187,14 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *            success:
  *              type: string
  *              example: true
+ *      '400':
+ *        description: Delete failed
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: not found
  *      '401':
  *        description: Invalid token.
  *        schema:
@@ -219,14 +211,6 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *            error:
  *              type: string
  *              example: invalid parameter
- *      '405':
- *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
  */
 router.delete('/:id', checkAuth, driversInTeamsController.deleteDriversInTeam);
 
