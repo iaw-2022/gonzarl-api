@@ -12,7 +12,7 @@ const finishesController = require('../controllers/finishes.controller.js');
  *       - Finishes
  *     responses:
  *       '200':
- *         description: OK
+ *         description: Successful response
  *         schema:
  *           type: array
  *           items:
@@ -80,7 +80,7 @@ router.get('/', finishesController.getFinishes);
  *        description: id of the race
  *    responses:
  *      '200':
- *        description: Successfull response
+ *        description: Successful response
  *        schema:
  *          type: object
  *          properties:

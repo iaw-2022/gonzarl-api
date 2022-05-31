@@ -12,7 +12,7 @@ const racesController = require('../controllers/races.controller');
  *       - Races
  *     responses:
  *       '200':
- *         description: OK
+ *         description: Successful response
  *         schema:
  *           type: array
  *           items:
@@ -56,7 +56,7 @@ router.get('/', racesController.getRaces);
  *       - Races
  *     responses:
  *       '200':
- *         description: OK
+ *         description: Successful response
  *         schema:
  *           type: object
  *           properties:

@@ -19,7 +19,7 @@ const teamsController = require('../controllers/teams.controller.js');
  *        description: id of the user owner of the team
  *    responses:
  *      '200':
- *        description: Successfull response
+ *        description: Successful response
  *        schema:
  *          type: object
  *          properties: 
@@ -81,7 +81,7 @@ router.get('/:id', teamsController.getTeamByUserId);
  *               type: integer
  *     responses:
  *       '201':
- *         description: Successfull creation
+ *         description: Successful creation
  *         schema: 
  *           type: object
  *           properties:
@@ -142,7 +142,7 @@ router.post('/', checkAuth, teamsController.createTeam);
  *         description: the new name for the team.
  *     responses:
  *       '201':
- *         description: Successfull update
+ *         description: Successful update
  *         schema:
  *           type: object
  *           properties:

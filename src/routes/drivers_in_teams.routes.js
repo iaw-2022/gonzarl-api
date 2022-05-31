@@ -19,7 +19,7 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *        description: id of the drivers_in_team
  *    responses:
  *      '200':
- *        description: Successfull response
+ *        description: Successful response
  *        schema:
  *          type: object
  *          properties:
@@ -81,7 +81,7 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *              type: integer
  *    responses:
  *      '201':
- *        description: Successfull creation
+ *        description: Successful creation
  *        schema:
  *          type: object
  *          properties:
@@ -145,7 +145,7 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *              type: integer
  *    responses:
  *      '200':
- *        description: Successfull update
+ *        description: Successful update
  *        schema:
  *          type: object
  *          properties:
@@ -196,7 +196,7 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *        description: id of the drivers_in_team
  *    responses:
  *      '200':
- *        description: Successfull response
+ *        description: Successful response
  *        schema:
  *          type: object
  *          properties:

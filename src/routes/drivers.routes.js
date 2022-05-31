@@ -117,7 +117,7 @@ router.get('/points',driversController.getDriversOrderedByPoints);
  *        description: id of the driver
  *    responses:
  *      '200':
- *        description: Successfull response
+ *        description: Successful response
  *        schema:
  *            type: object
  *            properties:
