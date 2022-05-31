@@ -1,7 +1,7 @@
 const db = require('../database');
 
 const getRaces = async (req, res) => {
-    const response = await db.query('SELECT * FROM RACES');
+    const response = await db.query('SELECT id, city, country, country, country_code, date, style FROM RACES');
     
     if (response.rows.length > 0 ){
         res.status(200).json(response.rows);
@@ -11,7 +11,7 @@ const getRaces = async (req, res) => {
 }
 
 const getNextRace = async (req, res) => {
-    const response = await db.query('SELECT * FROM RACES WHERE DATE > CURRENT_DATE');
+    const response = await db.query('SELECT id, city, country, country, country_code, date, style FROM RACES WHERE DATE > CURRENT_DATE');
     
     if (response.rows.length > 0 ){
         res.status(200).json(response.rows[0]);

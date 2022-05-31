@@ -1,7 +1,17 @@
 const db = require('../database');
 
 const getDrivers = async (req, res) => {
-    const response = await db.query('SELECT * FROM DRIVERS');
+    const response = await db.query('SELECT id, name, age, nationality, points, scuderia, number, value FROM DRIVERS');
+    
+    if (response.rows.length > 0 ){
+        res.status(200).json(response.rows);
+    }else {
+        res.status(404).json({error: 'not found.'});
+    }
+}
+
+const getDriversOrderedByPoints = async (req, res) => {
+    const response = await db.query('SELECT id, name, age, nationality, points, scuderia, number, value FROM DRIVERS ORDER BY points DESC');
     
     if (response.rows.length > 0 ){
         res.status(200).json(response.rows);
@@ -25,5 +35,6 @@ const getDriverById = async (req, res) => {
 }
 module.exports = {
     getDrivers,
+    getDriversOrderedByPoints,
     getDriverById
 }

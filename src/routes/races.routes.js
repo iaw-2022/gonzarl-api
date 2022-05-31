@@ -13,8 +13,38 @@ const racesController = require('../controllers/races.controller');
  *     responses:
  *       '200':
  *         description: OK
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties: 
+ *               id:
+ *                 type: integer
+ *                 example: 1
+ *               city:
+ *                 type: string
+ *                 example: Bahia blanca
+ *               country:
+ *                 type: string
+ *                 example: Argentina
+ *               country_code:
+ *                 type: string
+ *                 example: AR
+ *               date:
+ *                 type: date
+ *                 pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+ *                 example: "2019-05-17"
+ *               style:
+ *                 type: string
+ *                 example: Callejero
  *       '404':
  *         description: Not found
+ *         schema:
+ *           type: object
+ *           properties:
+ *             error:
+ *               type: string
+ *               example: not found
  */
 router.get('/', racesController.getRaces);
 /**
@@ -27,8 +57,36 @@ router.get('/', racesController.getRaces);
  *     responses:
  *       '200':
  *         description: OK
+ *         schema:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: integer
+ *               example: 1
+ *             city:
+ *               type: string
+ *               example: Bahia blanca
+ *             country:
+ *               type: string
+ *               example: Argentina
+ *             country_code:
+ *               type: string
+ *               example: AR
+ *             date:
+ *               type: date
+ *               pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+ *               example: "2019-05-17"
+ *             style:
+ *               type: string
+ *               example: Callejero
  *       '404':
  *         description: Not found
+ *         schema:
+ *           type: object
+ *           properties:
+ *             error:
+ *               type: string
+ *               example: not found
  */
 router.get('/next', racesController.getNextRace);
 

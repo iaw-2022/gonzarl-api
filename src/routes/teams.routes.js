@@ -20,10 +20,40 @@ const teamsController = require('../controllers/teams.controller.js');
  *    responses:
  *      '200':
  *        description: Successfull response
+ *        schema:
+ *          type: object
+ *          properties: 
+ *            id:
+ *              type: integer
+ *              example: 1
+ *            name:
+ *              type: string
+ *              example: Equipazoo
+ *            budget:
+ *              type: integer
+ *              example: 100000
+ *            points:
+ *              type: integer
+ *              example: 100
+ *            user_id:
+ *              type: integer
+ *              example: 2
  *      '404':
  *        description: Invalid parameter
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: invalid parameter
  *      '405':
  *        description: Not found
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: not found
  */
 router.get('/:id', teamsController.getTeamByUserId);
 /**
@@ -31,6 +61,8 @@ router.get('/:id', teamsController.getTeamByUserId);
  * /teams:
  *   post: 
  *     description: use to create a team.
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Teams
  *     parameters:
@@ -50,17 +82,45 @@ router.get('/:id', teamsController.getTeamByUserId);
  *     responses:
  *       '201':
  *         description: Successfull creation
+ *         schema: 
+ *           type: object
+ *           properties:
+ *             success: 
+ *               type: string
+ *               example: true
+ *       '401':
+ *        description: Invalid token.
+ *        schema: 
+ *          type: object
+ *          properties:
+ *            error: 
+ *              type: string
+ *              example: invalid token
  *       '404':
  *         description: Invalid parameters
+ *         schema: 
+ *           type: object
+ *           properties:
+ *             error: 
+ *               type: string
+ *               example: invalid parameters
  *       '405':
  *         description: Creation failed
+ *         schema: 
+ *           type: object
+ *           properties:
+ *             error: 
+ *               type: string
+ *               example: creation failed
  */
 router.post('/', checkAuth, teamsController.createTeam);
 /**
  *  @swagger 
  * /teams/{id}:
- *   post: 
+ *   put: 
  *     description: use to update a team name.
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Teams
  *     parameters:
@@ -83,10 +143,36 @@ router.post('/', checkAuth, teamsController.createTeam);
  *     responses:
  *       '201':
  *         description: Successfull update
+ *         schema:
+ *           type: object
+ *           properties:
+ *             success:
+ *               type: string
+ *               example: true
+ *       '401':
+ *        description: Invalid token.
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: invalid token
  *       '404':
  *         description: Invalid parameters
+ *         schema:
+ *           type: object
+ *           properties:
+ *             error:
+ *               type: string
+ *               example: invalid parameters
  *       '405':
  *         description: Update failed
+ *         schema:
+ *           type: object
+ *           properties:
+ *             error:
+ *               type: string
+ *               example: update failed
  */
 router.put('/:id', checkAuth, teamsController.updateTeamName);
 /**
@@ -94,6 +180,8 @@ router.put('/:id', checkAuth, teamsController.updateTeamName);
  * /teams/{id}:
  *  delete: 
  *    description: use to delete a team.
+ *    security: 
+ *      - bearerAuth: []
  *    tags:
  *      - Teams
  *    parameters:
@@ -106,10 +194,36 @@ router.put('/:id', checkAuth, teamsController.updateTeamName);
  *    responses:
  *      '200':
  *        description: Successfull response
+ *        schema:
+ *          type: object
+ *          properties:
+ *            success:
+ *              type: string
+ *              example: true
+ *      '401':
+ *        description: Invalid token.
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: invalid token
  *      '404':
  *        description: Invalid parameter
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: invalid parameter
  *      '405':
  *        description: Not found
+ *        schema:
+ *          type: object
+ *          properties:
+ *            error:
+ *              type: string
+ *              example: not found
  */
 router.delete('/:id', checkAuth, teamsController.deleteTeam);
 

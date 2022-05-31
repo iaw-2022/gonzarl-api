@@ -32,4 +32,10 @@ app.use('/drivers_in_teams', driversInTeamsRoutes);
 app.use('/races', racesRoutes);
 app.use('/finishes',finishesRoutes);
 
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send({error: "Invalid token"});
+    }
+});
+
 module.exports = app;
