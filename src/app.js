@@ -9,8 +9,6 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swaggerOptions = require('./swagger');
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-const { auth } = require('express-openid-connect');
-const config = require('./config');
 
 //app
 const app = express();
