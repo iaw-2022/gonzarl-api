@@ -4,6 +4,27 @@ const checkAuth = require('../auth');
 const driversInTeamsController = require('../controllers/drivers_in_teams.controller.js');
 
 /**
+ * @swagger
+ * components:
+ *   schemas:
+ *     DriversInTeams:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: integer
+ *          example: 1
+ *        team_id:
+ *          type: integer
+ *          example: 1
+ *        driver_1_id:
+ *          type: integer
+ *          example: 1
+ *        driver_2_id:
+ *          type: integer
+ *          example: 2
+ */
+
+/**
  * @swagger 
  * /drivers_in_teams/{id}:
  *  get: 
@@ -20,29 +41,12 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *    responses:
  *      '200':
  *        description: Successful response
- *        schema:
- *          type: object
- *          properties:
- *            id:
- *              type: integer
- *              example: 1
- *            team_id:
- *              type: integer
- *              example: 1
- *            driver_1_id:
- *              type: integer
- *              example: 1
- *            driver_2_id:
- *              type: integer
- *              example: 2
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#components/schemas/DriversInTeams'
  *      '404':
  *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
  */
 router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
 /**
@@ -74,28 +78,12 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *    responses:
  *      '201':
  *        description: Successful creation
- *        schema:
- *          type: object
- *          properties:
- *            success:
- *              type: string
- *              example: true
  *      '400':
- *        description: Creation failed.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: creation failed
+ *        description: Invalid parameters
  *      '401':
  *        description: Invalid token.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid token
+ *      '404':
+ *        description: Creation failed.
  */
 router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
 /**
@@ -130,36 +118,12 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *    responses:
  *      '200':
  *        description: Successful update
- *        schema:
- *          type: object
- *          properties:
- *            success:
- *              type: string
- *              example: true
  *      '400':
- *        description: Update failed
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: update failed
+ *        description: Invalid parameters
  *      '401':
  *        description: Invalid token.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid token
  *      '404':
- *        description: Invalid parameters
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameters
+ *        description: Update failed
  */
 router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
 /**
@@ -180,37 +144,13 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *        description: id of the drivers_in_team
  *    responses:
  *      '200':
- *        description: Successful response
- *        schema:
- *          type: object
- *          properties:
- *            success:
- *              type: string
- *              example: true
+ *        description: Successful deletion
  *      '400':
- *        description: Delete failed
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
+ *        description: Invalid parameter
  *      '401':
  *        description: Invalid token.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid token
  *      '404':
- *        description: Invalid parameter
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameter
+ *        description: delete failed
  */
 router.delete('/:id', checkAuth, driversInTeamsController.deleteDriversInTeam);
 

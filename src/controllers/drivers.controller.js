@@ -22,7 +22,7 @@ const getDriversOrderedByPoints = async (req, res) => {
 
 const getDriverById = async (req, res) => {
     if (isNaN([req.params.id])){
-        res.status(404).json({error: 'invalid parameter.'}); 
+        res.status(400).json({error: 'invalid parameter.'}); 
     }else{
         const checkExistsDriver = await db.query('SELECT * FROM DRIVERS WHERE id = $1', [req.params.id]);
         if (checkExistsDriver.rowCount > 0){
@@ -31,10 +31,10 @@ const getDriverById = async (req, res) => {
             if (response.rows.length > 0 ){
                 res.status(200).json(response.rows[0]);
             }else {
-                res.status(400).json({error: 'not found.'});
+                res.status(404).json({error: 'not found.'});
             }
         }else{
-            res.status(404).json({error: 'invalid parameter.'}); 
+            res.status(400).json({error: 'invalid parameter.'}); 
         }
     }
 }

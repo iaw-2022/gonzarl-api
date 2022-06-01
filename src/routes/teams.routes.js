@@ -4,6 +4,30 @@ const checkAuth = require('../auth');
 const teamsController = require('../controllers/teams.controller.js');
 
 /**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Team:
+ *       type: object
+ *       properties: 
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         name:
+ *           type: string
+ *           example: Equipazoo
+ *         budget:
+ *           type: integer
+ *           example: 100000
+ *         points:
+ *           type: integer
+ *           example: 100
+ *         user_id:
+ *           type: integer
+ *           example: 2
+ */
+
+/**
  * @swagger 
  * /teams/{user_id}:
  *  get: 
@@ -20,40 +44,14 @@ const teamsController = require('../controllers/teams.controller.js');
  *    responses:
  *      '200':
  *        description: Successful response
- *        schema:
- *          type: object
- *          properties: 
- *            id:
- *              type: integer
- *              example: 1
- *            name:
- *              type: string
- *              example: Equipazoo
- *            budget:
- *              type: integer
- *              example: 100000
- *            points:
- *              type: integer
- *              example: 100
- *            user_id:
- *              type: integer
- *              example: 2
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#components/schemas/Team'
  *      '400':
- *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
- *      '404':
  *        description: Invalid parameter
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameter
+ *      '404':
+ *        description: Not found
  */
 router.get('/:id', teamsController.getTeamByUserId);
 /**
@@ -82,36 +80,12 @@ router.get('/:id', teamsController.getTeamByUserId);
  *     responses:
  *       '201':
  *         description: Successful creation
- *         schema: 
- *           type: object
- *           properties:
- *             success: 
- *               type: string
- *               example: true
  *       '400':
- *         description: Creation failed
- *         schema: 
- *           type: object
- *           properties:
- *             error: 
- *               type: string
- *               example: creation failed
+ *         description: Invalid parameters
  *       '401':
  *        description: Invalid token.
- *        schema: 
- *          type: object
- *          properties:
- *            error: 
- *              type: string
- *              example: invalid token
  *       '404':
- *         description: Invalid parameters
- *         schema: 
- *           type: object
- *           properties:
- *             error: 
- *               type: string
- *               example: invalid parameters
+ *         description: Creation failed
  */
 router.post('/', checkAuth, teamsController.createTeam);
 /**
@@ -143,36 +117,12 @@ router.post('/', checkAuth, teamsController.createTeam);
  *     responses:
  *       '201':
  *         description: Successful update
- *         schema:
- *           type: object
- *           properties:
- *             success:
- *               type: string
- *               example: true
  *       '400':
- *         description: Update failed
- *         schema:
- *           type: object
- *           properties:
- *             error:
- *               type: string
- *               example: update failed
- *       '401':
- *        description: Invalid token.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid token
- *       '404':
  *         description: Invalid parameters
- *         schema:
- *           type: object
- *           properties:
- *             error:
- *               type: string
- *               example: invalid parameters
+ *       '401':
+ *         description: Invalid token.
+ *       '404':
+ *         description: Update failed
  */
 router.put('/:id', checkAuth, teamsController.updateTeamName);
 /**
@@ -194,36 +144,12 @@ router.put('/:id', checkAuth, teamsController.updateTeamName);
  *    responses:
  *      '200':
  *        description: Successfull response
- *        schema:
- *          type: object
- *          properties:
- *            success:
- *              type: string
- *              example: true
  *      '400':
- *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
+ *        description: Invalid parameter
  *      '401':
  *        description: Invalid token.
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid token
  *      '404':
- *        description: Invalid parameter
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameter
+ *        description: Not found
  */
 router.delete('/:id', checkAuth, teamsController.deleteTeam);
 

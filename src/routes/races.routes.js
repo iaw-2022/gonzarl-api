@@ -4,6 +4,34 @@ const router = express.Router();
 const racesController = require('../controllers/races.controller');
 
 /**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Race:
+ *       type: object
+ *       properties: 
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         city:
+ *           type: string
+ *           example: Bahia blanca
+ *         country:
+ *           type: string
+ *           example: Argentina
+ *         country_code:
+ *           type: string
+ *           example: AR
+ *         date:
+ *           type: date
+ *           pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+ *           example: "2019-05-17"
+ *         style:
+ *           type: string
+ *           example: Callejero
+ */
+
+/**
  *  @swagger 
  * /races:
  *   get: 
@@ -13,38 +41,14 @@ const racesController = require('../controllers/races.controller');
  *     responses:
  *       '200':
  *         description: Successful response
- *         schema:
- *           type: array
- *           items:
- *             type: object
- *             properties: 
- *               id:
- *                 type: integer
- *                 example: 1
- *               city:
- *                 type: string
- *                 example: Bahia blanca
- *               country:
- *                 type: string
- *                 example: Argentina
- *               country_code:
- *                 type: string
- *                 example: AR
- *               date:
- *                 type: date
- *                 pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
- *                 example: "2019-05-17"
- *               style:
- *                 type: string
- *                 example: Callejero
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#components/schemas/Race'
  *       '404':
  *         description: Not found
- *         schema:
- *           type: object
- *           properties:
- *             error:
- *               type: string
- *               example: not found
  */
 router.get('/', racesController.getRaces);
 /**
@@ -57,36 +61,12 @@ router.get('/', racesController.getRaces);
  *     responses:
  *       '200':
  *         description: Successful response
- *         schema:
- *           type: object
- *           properties:
- *             id:
- *               type: integer
- *               example: 1
- *             city:
- *               type: string
- *               example: Bahia blanca
- *             country:
- *               type: string
- *               example: Argentina
- *             country_code:
- *               type: string
- *               example: AR
- *             date:
- *               type: date
- *               pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
- *               example: "2019-05-17"
- *             style:
- *               type: string
- *               example: Callejero
+ *         content: 
+ *           application/json:
+ *             schema:
+ *               $ref: '#components/schemas/Race'
  *       '404':
  *         description: Not found
- *         schema:
- *           type: object
- *           properties:
- *             error:
- *               type: string
- *               example: not found
  */
 router.get('/next', racesController.getNextRace);
 /**
@@ -106,44 +86,14 @@ router.get('/next', racesController.getNextRace);
  *    responses:
  *      '200':
  *        description: Successful response
- *        schema:
- *          type: object
- *          properties: 
- *            id:
- *              type: integer
- *              example: 1
- *            city:
- *              type: string
- *              example: Bahia Blanca
- *            country:
- *              type: string
- *              example: Argentina
- *            country_code:
- *              type: string
- *              example: AR
- *            date:
- *              type: date
- *              pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
- *              example: "2019-05-17"
- *            style:
- *              type: string
- *              example: Callejero
+ *        content: 
+ *          application/json:
+ *            schema:
+ *              $ref: '#components/schemas/Race'        
  *      '400':
- *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
- *      '404':
  *        description: Invalid parameter
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameter
+ *      '404':
+ *        description: Not found
  */
 router.get('/:id', racesController.getRaceById);
 module.exports = router;

@@ -28,7 +28,7 @@ const getNextRace = async (req, res) => {
 
 const getRaceById = async(req, res) => {
     if (isNaN([req.params.id])){
-        res.status(404).json({error: 'invalid parameter.'}); 
+        res.status(400).json({error: 'invalid parameter.'}); 
     }else{
         const response = await db.query('SELECT id, city, country, country_code, date, style FROM RACES WHERE id = $1',[req.params.id]);
         if (response.rows.length > 0 ){
@@ -37,7 +37,7 @@ const getRaceById = async(req, res) => {
             }
             res.status(200).json(response.rows[0]);
         }else {
-            res.status(400).json({error: 'not found.'});
+            res.status(404).json({error: 'not found.'});
         }
     }
 }

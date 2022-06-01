@@ -28,13 +28,13 @@ const createDriversInTeam = async (req, res) => {
             ]);
             res.status(201).json({success: 'true'});
         }else{
-            res.status(404).json({
+            res.status(400).json({
                 error: 'invalid parameters',
             });
         }
 
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'creation failed',
         }); 
     }
@@ -43,7 +43,7 @@ const createDriversInTeam = async (req, res) => {
 const updateDriversInTeam = async (req, res) => {
     try{
         if (isNaN([req.params.id])){
-            res.status(404).json({
+            res.status(400).json({
                 error: 'invalid parameter',
             }); 
         }else{
@@ -60,13 +60,13 @@ const updateDriversInTeam = async (req, res) => {
                 ]);
                 res.status(200).json({success: 'true'});
             }else{
-                res.status(404).json({
+                res.status(400).json({
                     error: 'invalid parameters',
                 });
             }
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'update failed',
         }); 
     }
@@ -75,18 +75,18 @@ const updateDriversInTeam = async (req, res) => {
 const deleteDriversInTeam = async (req, res) => {
     try{
         if (isNaN([req.params.id])){
-            res.status(404).json({error: 'parameter not valid.'}); 
+            res.status(400).json({error: 'parameter not valid.'}); 
         }else{
             const checkExistsTeam = await db.query('SELECT * FROM drivers_in_team WHERE id = $1', [req.params.id]);
             if (checkExistsTeam.rowCount>0){
                 const response = await db.query('DELETE FROM drivers_in_teams WHERE id = $1',[req.params.id]);
                 res.status(200).json({success: 'true'});
             }else{
-                res.status(404).json({error: 'parameter not valid.'}); 
+                res.status(400).json({error: 'parameter not valid.'}); 
             }
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'delete failed',
         }); 
     }

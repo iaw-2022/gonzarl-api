@@ -2,13 +2,13 @@ const db = require('../database');
 
 const getTeamByUserId = async (req, res) => {
     if (isNaN([req.params.id])){
-        res.status(404).json({error: 'invalid parameter.'}); 
+        res.status(400).json({error: 'invalid parameter.'}); 
     }else{
         const response = await db.query('SELECT id, name, budget, points, user_id FROM TEAMS WHERE user_id = $1',[req.params.id]);
         if (response.rows.length > 0 ){
             res.status(200).json(response.rows[0]);
         }else {
-            res.status(400).json({error: 'not found.'});
+            res.status(404).json({error: 'not found.'});
         }
     }
 }
@@ -24,12 +24,12 @@ const createTeam = async (req, res) => {
             ]);
             res.status(201).json({success: 'true'});
         }else{
-            res.status(404).json({
+            res.status(400).json({
                 error: 'invalid parameters'
             }); 
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'creation failed'
         }); 
     }
@@ -38,7 +38,7 @@ const createTeam = async (req, res) => {
 const updateTeamName = async (req, res) => {
     try{
         if (isNaN([req.params.id])){
-            res.status(404).json({error: 'parameter not valid.'}); 
+            res.status(400).json({error: 'parameter not valid.'}); 
         }else{
             const checkExistsTeam = await db.query('SELECT * FROM TEAMS WHERE id = $1', [req.params.id]);
             if (checkExistsTeam.rowCount > 0){
@@ -47,11 +47,11 @@ const updateTeamName = async (req, res) => {
                     'UPDATE teams SET name = $1 WHERE id = $2', [name, req.params.id]);
                 res.status(200).json({success: 'true'});
             } else{
-                res.status(404).json({error: 'parameter not valid.'});   
+                res.status(400).json({error: 'parameter not valid.'});   
             }
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'update failed',
         }); 
     }
@@ -60,18 +60,18 @@ const updateTeamName = async (req, res) => {
 const deleteTeam = async (req, res) => {
     try{
         if (isNaN([req.params.id])){
-            res.status(404).json({error: 'parameter not valid.'}); 
+            res.status(400).json({error: 'parameter not valid.'}); 
         }else{
             const checkExistsTeam = await db.query('SELECT * FROM TEAMS WHERE id = $1', [req.params.id]);
             if (checkExistsTeam.rowCount > 0){
                 const response = await db.query('DELETE FROM TEAMS WHERE id = $1',[req.params.id]);
                 res.status(200).json({success: 'true'});
             }else{
-                res.status(404).json({error: 'parameter not valid.'});
+                res.status(400).json({error: 'parameter not valid.'});
             }
         }
     }catch(err){
-        res.status(400).json({
+        res.status(404).json({
             error: 'delete failed',
         }); 
     }

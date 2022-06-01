@@ -2,6 +2,38 @@ const express = require('express');
 const router = express.Router();
 
 const driversController = require('../controllers/drivers.controller.js');
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Driver:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         name:
+ *           type: string
+ *           example: Juan Manuel Fangio
+ *         age:
+ *           type: integer
+ *           example: 25
+ *         nationality:
+ *           type: string
+ *           example: Argentino
+ *         points:
+ *           type: string
+ *           example: 50
+ *         scuderia:
+ *           type: string
+ *           example: Ferrari
+ *         number: 
+ *           type: integer
+ *           example: 66
+ *         value:
+ *           type: integer
+ *           example: 100000
+ */
 
 /**
  * @swagger
@@ -13,43 +45,14 @@ const driversController = require('../controllers/drivers.controller.js');
  *     responses:
  *       '200':
  *         description: Sucessful response
- *         schema:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               id:
- *                 type: integer
- *                 example: 1
- *               name:
- *                 type: string
- *                 example: Juan Manuel Fangio
- *               age:
- *                 type: integer
- *                 example: 25
- *               nationality:
- *                 type: string
- *                 example: Argentino
- *               points:
- *                 type: string
- *                 example: 50
- *               scuderia:
- *                 type: string
- *                 example: Ferrari
- *               number: 
- *                 type: integer
- *                 example: 66
- *               value:
- *                 type: integer
- *                 example: 100000
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#components/schemas/Driver'
  *       '404':
  *         description: Not found
- *         schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
  */
 router.get('/', driversController.getDrivers);
 /**
@@ -62,43 +65,14 @@ router.get('/', driversController.getDrivers);
  *     responses:
  *       '200':
  *         description: Sucessful response
- *         schema:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               id:
- *                 type: integer
- *                 example: 1
- *               name:
- *                 type: string
- *                 example: Juan Manuel Fangio
- *               age:
- *                 type: integer
- *                 example: 25
- *               nationality:
- *                 type: string
- *                 example: Argentino
- *               points:
- *                 type: string
- *                 example: 50
- *               scuderia:
- *                 type: string
- *                 example: Ferrari
- *               number: 
- *                 type: integer
- *                 example: 66
- *               value:
- *                 type: integer
- *                 example: 100000
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#components/schemas/Driver'
  *       '404':
  *         description: Not found
- *         schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
  */
 router.get('/points',driversController.getDriversOrderedByPoints);
 /**
@@ -118,49 +92,14 @@ router.get('/points',driversController.getDriversOrderedByPoints);
  *    responses:
  *      '200':
  *        description: Successful response
- *        schema:
- *            type: object
- *            properties:
- *              id:
- *                type: integer
- *                example: 1
- *              name:
- *                type: string
- *                example: Juan Manuel Fangio
- *              age:
- *                type: integer
- *                example: 25
- *              nationality:
- *                type: string
- *                example: Argentino
- *              points:
- *                type: string
- *                example: 50
- *              scuderia:
- *                type: string
- *                example: Ferrari
- *              number: 
- *                type: integer
- *                example: 66
- *              value:
- *                type: integer
- *                example: 100000
+ *        content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#components/schemas/Driver'
  *      '400':
- *        description: Not found
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: not found
- *      '404':
  *        description: Invalid parameter
- *        schema:
- *          type: object
- *          properties:
- *            error:
- *              type: string
- *              example: invalid parameter
+ *      '404':
+ *        description: Not found
  */
 router.get('/:id', driversController.getDriverById);
 
