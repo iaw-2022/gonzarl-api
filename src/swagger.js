@@ -3,7 +3,6 @@ const path = require('path');
 
 const swaggerOptions = {
     swaggerDefinition: {
-        openapi: "3.0.0",
         info: {
             title: 'F1 Fantasy 2022 API',
             description: 'API Docs',

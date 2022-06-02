@@ -4,35 +4,34 @@ const router = express.Router();
 const driversController = require('../controllers/drivers.controller.js');
 /**
  * @swagger
- * components:
- *   schemas:
- *     Driver:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *           example: 1
- *         name:
- *           type: string
- *           example: Juan Manuel Fangio
- *         age:
- *           type: integer
- *           example: 25
- *         nationality:
- *           type: string
- *           example: Argentino
- *         points:
- *           type: string
- *           example: 50
- *         scuderia:
- *           type: string
- *           example: Ferrari
- *         number: 
- *           type: integer
- *           example: 66
- *         value:
- *           type: integer
- *           example: 100000
+ * definitions:
+ *   Driver:
+ *     type: object
+ *     properties:
+ *       id:
+ *         type: string
+ *         example: 1
+ *       name:
+ *         type: string
+ *         example: Juan Manuel Fangio
+ *       age:
+ *         type: string
+ *         example: 25
+ *       nationality:
+ *         type: string
+ *         example: Argentino
+ *       points:
+ *         type: integer
+ *         example: 50
+ *       scuderia:
+ *         type: string
+ *         example: Ferrari
+ *       number: 
+ *         type: string
+ *         example: 66
+ *       value:
+ *         type: integer
+ *         example: 100000
  */
 
 /**
@@ -45,12 +44,10 @@ const driversController = require('../controllers/drivers.controller.js');
  *     responses:
  *       '200':
  *         description: Sucessful response
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#components/schemas/Driver'
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: '#definitions/Driver'
  *       '404':
  *         description: Not found
  */
@@ -65,12 +62,10 @@ router.get('/', driversController.getDrivers);
  *     responses:
  *       '200':
  *         description: Sucessful response
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#components/schemas/Driver'
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: '#definitions/Driver'
  *       '404':
  *         description: Not found
  */
@@ -86,16 +81,14 @@ router.get('/points',driversController.getDriversOrderedByPoints);
  *      - in: path
  *        name: driver_id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the driver
  *    responses:
  *      '200':
  *        description: Successful response
- *        content:
- *           application/json:
- *             schema:
- *               $ref: '#components/schemas/Driver'
+ *        schema:
+ *          $ref: '#definitions/Driver'
  *      '400':
  *        description: Invalid parameter
  *      '404':

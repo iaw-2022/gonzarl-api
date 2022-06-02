@@ -5,23 +5,22 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     DriversInTeams:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          example: 1
- *        team_id:
- *          type: integer
- *          example: 1
- *        driver_1_id:
- *          type: integer
- *          example: 1
- *        driver_2_id:
- *          type: integer
- *          example: 2
+ * definitions:
+ *   DriversInTeams:
+ *    type: object
+ *    properties:
+ *      id:
+ *        type: string
+ *        example: 1
+ *      team_id:
+ *        type: string
+ *        example: 1
+ *      driver_1_id:
+ *        type: string
+ *        example: 1
+ *      driver_2_id:
+ *        type: string
+ *        example: 2
  */
 
 /**
@@ -35,16 +34,14 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *      - in: path
  *        name: id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the drivers_in_team
  *    responses:
  *      '200':
  *        description: Successful response
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#components/schemas/DriversInTeams'
+ *        schema:
+ *          $ref: '#definitions/DriversInTeams'
  *      '404':
  *        description: Not found
  */
@@ -70,11 +67,11 @@ router.get('/:id', driversInTeamsController.getDriversInTeamByTeamId);
  *            - driver_2_id
  *          properties:
  *            team_id:
- *              type: integer
+ *              type: string
  *            driver_1_id:
- *              type: integer
+ *              type: string
  *            driver_2_id:
- *              type: integer
+ *              type: string
  *    responses:
  *      '201':
  *        description: Successful creation
@@ -99,7 +96,7 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *      - in: path
  *        name: id
  *        schema:
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the drivers in the team
  *      - in: body
@@ -112,9 +109,9 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *            - driver_2_id
  *          properties:
  *            driver_1_id:
- *              type: integer
+ *              type: string
  *            driver_2_id:
- *              type: integer
+ *              type: string
  *    responses:
  *      '200':
  *        description: Successful update
@@ -139,7 +136,7 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *      - in: path
  *        name: id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the drivers_in_team
  *    responses:

@@ -5,47 +5,46 @@ const finishesController = require('../controllers/finishes.controller.js');
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Finishes:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *           example: 1
- *         race_id:
- *           type: integer
- *           example: 1
- *         driver_1_id:
- *           type: integer
- *           example: 1
- *         driver_2_id:
- *           type: integer
- *           example: 2
- *         driver_3_id:
- *           type: integer
- *           example: 3
- *         driver_4_id:
- *           type: integer
- *           example: 4
- *         driver_5_id:
- *           type: integer
- *           example: 5
- *         driver_6_id:
- *           type: integer
- *           example: 6
- *         driver_7_id:
- *           type: integer
- *           example: 7
- *         driver_8_id:
- *           type: integer
- *           example: 8
- *         driver_9_id:
- *           type: integer
- *           example: 9
- *         driver_10_id:
- *           type: integer
- *           example: 10                 
+ * definitions:
+ *   Finishes:
+ *     type: object
+ *     properties:
+ *       id:
+ *         type: string
+ *         example: 1
+ *       race_id:
+ *         type: string
+ *         example: 1
+ *       driver_1_id:
+ *         type: string
+ *         example: 1
+ *       driver_2_id:
+ *         type: string
+ *         example: 2
+ *       driver_3_id:
+ *         type: string
+ *         example: 3
+ *       driver_4_id:
+ *         type: string
+ *         example: 4
+ *       driver_5_id:
+ *         type: string
+ *         example: 5
+ *       driver_6_id:
+ *         type: string
+ *         example: 6
+ *       driver_7_id:
+ *         type: string
+ *         example: 7
+ *       driver_8_id:
+ *         type: string
+ *         example: 8
+ *       driver_9_id:
+ *         type: string
+ *         example: 9
+ *       driver_10_id:
+ *         type: string
+ *         example: 10                 
  */
 
 /**
@@ -58,12 +57,10 @@ const finishesController = require('../controllers/finishes.controller.js');
  *     responses:
  *       '200':
  *         description: Successful response
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#components/schemas/Finishes'
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: '#definitions/Finishes'
  *       '404':
  *         description: Not found
  */
@@ -79,16 +76,14 @@ router.get('/', finishesController.getFinishes);
  *      - in: path
  *        name: race_id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the race
  *    responses:
  *      '200':
  *        description: Successful response
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#components/schemas/Finishes'   
+ *        schema:
+ *          $ref: '#definitions/Finishes'   
  *      '400':
  *        description: Invalid parameter
  *      '404':

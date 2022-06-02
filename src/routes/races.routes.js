@@ -5,30 +5,29 @@ const racesController = require('../controllers/races.controller');
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Race:
- *       type: object
- *       properties: 
- *         id:
- *           type: integer
- *           example: 1
- *         city:
- *           type: string
- *           example: Bahia blanca
- *         country:
- *           type: string
- *           example: Argentina
- *         country_code:
- *           type: string
- *           example: AR
- *         date:
- *           type: date
- *           pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
- *           example: "2019-05-17"
- *         style:
- *           type: string
- *           example: Callejero
+ * definitions:
+ *   Race:
+ *     type: object
+ *     properties: 
+ *       id:
+ *         type: string
+ *         example: 1
+ *       city:
+ *         type: string
+ *         example: Bahia blanca
+ *       country:
+ *         type: string
+ *         example: Argentina
+ *       country_code:
+ *         type: string
+ *         example: AR
+ *       date:
+ *         type: date
+ *         pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+ *         example: "2019-05-17"
+ *       style:
+ *         type: string
+ *         example: Callejero
  */
 
 /**
@@ -41,12 +40,10 @@ const racesController = require('../controllers/races.controller');
  *     responses:
  *       '200':
  *         description: Successful response
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#components/schemas/Race'
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: '#definitions/Race'
  *       '404':
  *         description: Not found
  */
@@ -61,10 +58,8 @@ router.get('/', racesController.getRaces);
  *     responses:
  *       '200':
  *         description: Successful response
- *         content: 
- *           application/json:
- *             schema:
- *               $ref: '#components/schemas/Race'
+ *         schema:
+ *           $ref: '#definitions/Race'
  *       '404':
  *         description: Not found
  */
@@ -80,16 +75,14 @@ router.get('/next', racesController.getNextRace);
  *      - in: path
  *        name: id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the race
  *    responses:
  *      '200':
  *        description: Successful response
- *        content: 
- *          application/json:
- *            schema:
- *              $ref: '#components/schemas/Race'        
+ *        schema:
+ *          $ref: '#definitions/Race'        
  *      '400':
  *        description: Invalid parameter
  *      '404':

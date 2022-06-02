@@ -5,26 +5,25 @@ const teamsController = require('../controllers/teams.controller.js');
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Team:
- *       type: object
- *       properties: 
- *         id:
- *           type: integer
- *           example: 1
- *         name:
- *           type: string
- *           example: Equipazoo
- *         budget:
- *           type: integer
- *           example: 100000
- *         points:
- *           type: integer
- *           example: 100
- *         user_id:
- *           type: integer
- *           example: 2
+ * definitions:
+ *   Team:
+ *     type: object
+ *     properties: 
+ *       id:
+ *         type: string
+ *         example: 1
+ *       name:
+ *         type: string
+ *         example: Equipazoo
+ *       budget:
+ *         type: integer
+ *         example: 100000
+ *       points:
+ *         type: integer
+ *         example: 100
+ *       user_id:
+ *         type: string
+ *         example: 2
  */
 
 /**
@@ -38,16 +37,14 @@ const teamsController = require('../controllers/teams.controller.js');
  *      - in: path
  *        name: user_id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the user owner of the team
  *    responses:
  *      '200':
  *        description: Successful response
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#components/schemas/Team'
+ *        schema:
+ *          $ref: '#definitions/Team'
  *      '400':
  *        description: Invalid parameter
  *      '404':
@@ -76,7 +73,7 @@ router.get('/:id', teamsController.getTeamByUserId);
  *             name:
  *               type: string
  *             user_id:
- *               type: integer
+ *               type: string
  *     responses:
  *       '201':
  *         description: Successful creation
@@ -101,7 +98,7 @@ router.post('/', checkAuth, teamsController.createTeam);
  *       - in: path
  *         name: id  
  *         schema: 
- *           type: integer
+ *           type: string
  *         required: true
  *         description: id of the team
  *       - in: body
@@ -138,7 +135,7 @@ router.put('/:id', checkAuth, teamsController.updateTeamName);
  *      - in: path
  *        name: id  
  *        schema: 
- *          type: integer
+ *          type: string
  *        required: true
  *        description: id of the team
  *    responses:
