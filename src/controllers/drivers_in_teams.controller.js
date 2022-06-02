@@ -58,7 +58,7 @@ const updateDriversInTeam = async (req, res) => {
             const checkExistingDriver2 = await db.query('SELECT * FROM drivers WHERE id = $1',[driver_2_id]);
             
             if (checkExistsTeam.rowCount>0 && checkExistingDriver1.rowCount>0 && checkExistingDriver2.rowCount>0){
-                const response = await db.query('UPDATE drivers_in_teams SET driver_1_id = $1, driver_2_id = $2 WHERE id = $3', [
+                const response = await db.query('UPDATE drivers_in_teams SET driver_1_id = $1, driver_2_id = $2 WHERE team_id = $3', [
                     driver_1_id, 
                     driver_2_id, 
                     req.params.id

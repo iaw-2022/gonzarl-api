@@ -32,6 +32,9 @@ const driversController = require('../controllers/drivers.controller.js');
  *       value:
  *         type: integer
  *         example: 100000
+ *       path:
+ *         type: string
+ *         example: "http://img.com"
  */
 
 /**

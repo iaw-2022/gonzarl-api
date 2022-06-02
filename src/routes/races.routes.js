@@ -28,6 +28,9 @@ const racesController = require('../controllers/races.controller');
  *       style:
  *         type: string
  *         example: Callejero
+ *       path:
+ *         type: string
+ *         example: "http://img.com"
  */
 
 /**
