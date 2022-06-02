@@ -36,7 +36,7 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *        schema: 
  *          type: string
  *        required: true
- *        description: id of the drivers_in_team
+ *        description: id of the team
  *    responses:
  *      '200':
  *        description: Successful response
@@ -98,7 +98,7 @@ router.post('/', checkAuth, driversInTeamsController.createDriversInTeam);
  *        schema:
  *          type: string
  *        required: true
- *        description: id of the drivers in the team
+ *        description: id of the team
  *      - in: body
  *        name: drivers_in_team
  *        description: The drivers to assign to a team.  
@@ -138,7 +138,7 @@ router.put('/:id', checkAuth, driversInTeamsController.updateDriversInTeam);
  *        schema: 
  *          type: string
  *        required: true
- *        description: id of the drivers_in_team
+ *        description: id of the team
  *    responses:
  *      '200':
  *        description: Successful deletion
