@@ -15,7 +15,7 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 const app = express();
 
 //middlewares
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 
 //routes
