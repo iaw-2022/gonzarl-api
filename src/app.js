@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const teamsRoutes = require('./routes/teams.routes');
 const driversRoutes = require('./routes/drivers.routes');
 const driversInTeamsRoutes = require('./routes/drivers_in_teams.routes');
@@ -14,6 +15,7 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 const app = express();
 
 //middlewares
+app.use(cors);
 app.use(express.json());
 
 //routes
