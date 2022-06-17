@@ -8,7 +8,18 @@ const getDriversInTeamByTeamId = async (req, res) => {
         if (checkExistTeam.rowCount > 0){
             const response = await db.query('SELECT id, team_id, driver_1_id, driver_2_id FROM drivers_in_teams WHERE team_id = $1',[req.params.id]);
             if (response.rows.length > 0 ){
-                res.status(200).json(response.rows[0]);
+                const driver1 = response.rows[0].driver_1_id;
+                const driver2 = response.rows[0].driver_2_id;
+                const drivers = await db.query('SELECT id, name, value FROM drivers WHERE id = $1 OR id = $2',[driver1, driver2]);
+                for (let i = 0; i<drivers.rows.length;i++){
+                    const image = await db.query('SELECT path FROM driver_images WHERE driver_id = $1', [drivers.rows[i].id]);
+                    if (image.rowCount > 0){
+                        drivers.rows[i].path = image.rows[0].path
+                    }else{
+                        drivers.rows[i].path = ""
+                    }
+                }
+                res.status(200).json(drivers.rows);
             }else {
                 res.status(404).json({error: 'not found.'});
             }

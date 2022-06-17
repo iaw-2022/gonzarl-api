@@ -12,15 +12,15 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *      id:
  *        type: string
  *        example: 1
- *      team_id:
+ *      name:
  *        type: string
- *        example: 1
- *      driver_1_id:
+ *        example: Carlos Rapido
+ *      value:
+ *        type: integer
+ *        example: 10000
+ *      path:
  *        type: string
- *        example: 1
- *      driver_2_id:
- *        type: string
- *        example: 2
+ *        example: "http://img.com"
  */
 
 /**
@@ -41,7 +41,9 @@ const driversInTeamsController = require('../controllers/drivers_in_teams.contro
  *      '200':
  *        description: Successful response
  *        schema:
- *          $ref: '#definitions/DriversInTeams'
+ *          type: array
+ *          items:
+ *            $ref: '#definitions/DriversInTeams'
  *      '404':
  *        description: Not found
  */
