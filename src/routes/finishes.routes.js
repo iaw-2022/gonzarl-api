@@ -12,59 +12,14 @@ const finishesController = require('../controllers/finishes.controller.js');
  *       id:
  *         type: string
  *         example: 1
- *       race_id:
+ *       name:
  *         type: string
- *         example: 1
- *       driver_1_id:
+ *         example: Carlos Rapido
+ *       scuderia:
  *         type: string
- *         example: 1
- *       driver_2_id:
- *         type: string
- *         example: 2
- *       driver_3_id:
- *         type: string
- *         example: 3
- *       driver_4_id:
- *         type: string
- *         example: 4
- *       driver_5_id:
- *         type: string
- *         example: 5
- *       driver_6_id:
- *         type: string
- *         example: 6
- *       driver_7_id:
- *         type: string
- *         example: 7
- *       driver_8_id:
- *         type: string
- *         example: 8
- *       driver_9_id:
- *         type: string
- *         example: 9
- *       driver_10_id:
- *         type: string
- *         example: 10                 
+ *         example: Argentina Racing Team
  */
 
-/**
- *  @swagger 
- * /finishes:
- *   get: 
- *     description: use to get all the finishes results for the races.
- *     tags:
- *       - Finishes
- *     responses:
- *       '200':
- *         description: Successful response
- *         schema:
- *           type: array
- *           items:
- *             $ref: '#definitions/Finishes'
- *       '404':
- *         description: Not found
- */
-router.get('/', finishesController.getFinishes);
 /**
  * @swagger 
  * /finishes/{race_id}:
@@ -83,7 +38,9 @@ router.get('/', finishesController.getFinishes);
  *      '200':
  *        description: Successful response
  *        schema:
- *          $ref: '#definitions/Finishes'   
+ *          type: array
+ *          items:
+ *            $ref: '#definitions/Finishes'   
  *      '400':
  *        description: Invalid parameter
  *      '404':
