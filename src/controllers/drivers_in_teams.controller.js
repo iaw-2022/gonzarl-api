@@ -102,7 +102,7 @@ const deleteDriversInTeam = async (req, res) => {
         }else{
             const checkExistsTeam = await db.query('SELECT * FROM teams WHERE id = $1', [req.params.id]);
             if (checkExistsTeam.rowCount>0){
-                const response = await db.query('DELETE FROM drivers_in_teams WHERE id = $1',[req.params.id]);
+                const response = await db.query('DELETE FROM drivers_in_teams WHERE team_id = $1',[req.params.id]);
                 res.status(200).json({success: 'true'});
             }else{
                 res.status(400).json({error: 'parameter not valid.'}); 
