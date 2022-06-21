@@ -42,6 +42,9 @@ const createDriversInTeam = async (req, res) => {
                 driver_1_id, 
                 driver_2_id
             ]);
+
+            const budget = checkExistingDriver1.rows[0].value + checkExistingDriver2.rows[0].value;
+            const updateBudget = await db.query('UPDATE teams SET budget = $1 WHERE id = $2', [budget, team_id])
             res.status(201).json({success: 'true'});
         }else{
             res.status(400).json({
@@ -74,6 +77,10 @@ const updateDriversInTeam = async (req, res) => {
                     driver_2_id, 
                     req.params.id
                 ]);
+
+                const budget = checkExistingDriver1.rows[0].value + checkExistingDriver2.rows[0].value;
+                const updateBudget = await db.query('UPDATE teams SET budget = $1 WHERE id = $2', [budget, req.params.id])
+
                 res.status(200).json({success: 'true'});
             }else{
                 res.status(400).json({

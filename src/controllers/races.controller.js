@@ -22,7 +22,7 @@ const getRaces = async (req, res) => {
 }
 
 const getNextRace = async (req, res) => {
-    const response = await db.query('SELECT id, city, country, country_code, date, style, laps FROM RACES WHERE DATE > CURRENT_DATE');
+    const response = await db.query('SELECT id, city, country, country_code, date, style, laps FROM RACES WHERE DATE >= CURRENT_DATE');
     
     if (response.rows.length > 0 ){
         response.rows[0].date = response.rows[0].date.toLocaleDateString('en-CA')
