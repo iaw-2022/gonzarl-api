@@ -68,11 +68,8 @@ router.get('/:id', teamsController.getTeamByUserId);
  *           type: object
  *           required:
  *             - name
- *             - user_id
  *           properties:
  *             name:
- *               type: string
- *             user_id:
  *               type: string
  *     responses:
  *       '201':

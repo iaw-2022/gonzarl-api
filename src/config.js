@@ -12,4 +12,5 @@ module.exports = {
     AUTH_AUDIENCE: process.env.AUTH_AUDIENCE,
     AUTH_ISSUER: process.env.AUTH_ISSUER,
     AUTH_ALGORITHM: process.env.AUTH_ALGORITHM,
+    AUTH_INFO: process.env.AUTH_INFO,
 }
