@@ -1,50 +1,60 @@
 const db = require('../database');
 const getUserInfoFromToken = require('../utils/authInfo').getUserInfoFromToken;
 
-const getTeamByUserId = async (req, res) => {
-    if (isNaN([req.params.id])){
-        res.status(400).json({error: 'invalid parameter.'}); 
-    }else{
-        const response = await db.query('SELECT id, name, budget, points, user_id FROM TEAMS WHERE user_id = $1',[req.params.id]);
-        if (response.rows.length > 0 ){
-            res.status(200).json(response.rows[0]);
-        }else {
-            res.status(404).json({error: 'not found.'});
-        }
+const getTeam = async (req, res) => {
+    try{
+        const user_info = await getUserInfoFromToken(req);
+        await findUserId(user_info).then(
+            async (user_id) => {
+                const response = await db.query('SELECT id, name, budget, points, user_id FROM TEAMS WHERE user_id = $1',[user_id]);
+                if (response.rows.length > 0 ){
+                    res.status(200).json(response.rows[0]);
+                }else {
+                    res.status(404).json({error: 'not found.'});
+                }
+            }
+        )
+    }catch(err){
+        res.status(404).json({
+            error: err.message
+        }); 
     }
 }
 
 const createTeam = async (req, res) => {
     try{
         const user_info = await getUserInfoFromToken(req);
-        const user_id = await findUserId(user_info);
-        const {name} = req.body;
+        await findUserId(user_info).then(
+            (user_id) => {
+                const {name} = req.body;
         
-        const response = await db.query('INSERT INTO teams (name, user_id) VALUES ($1, $2)',[
-            name, 
-            user_id
-        ]);
-        res.status(201).json({success: 'true'});
-        
+                const response = db.query('INSERT INTO teams (name, user_id) VALUES ($1, $2)',[
+                    name, 
+                    user_id
+                ]);
+                res.status(201).json({success: 'true'});
+            }
+        )
     }catch(err){
         res.status(404).json({
-            error: 'creation failed'
+            error: err.message
         }); 
     }
 }
 
 async function findUserId(user_info){
     const user = await db.query('SELECT id FROM users WHERE email = $1', [user_info.email]).then(
-        async (user) => {
+        (user) => {
             if (user.rowCount > 0){
                 return user.rows[0].id
             }else{
-                return await db.query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) returning id', [
+                return db.query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) returning id', [
                     user_info.name, user_info.email, user_info.name
                 ])
             }
         }
     )
+    return user
 }
 
 const updateTeamName = async (req, res) => {
@@ -90,7 +100,7 @@ const deleteTeam = async (req, res) => {
 }
 
 module.exports = {
-    getTeamByUserId,
+    getTeam,
     createTeam,
     updateTeamName,
     deleteTeam

@@ -28,18 +28,13 @@ const teamsController = require('../controllers/teams.controller.js');
 
 /**
  * @swagger 
- * /teams/{user_id}:
+ * /teams/:
  *  get: 
- *    description: use to request a user team.
+ *    description: use to request the team for the user that logged in.
+ *    security: 
+ *       - bearerAuth: []
  *    tags:
  *      - Teams
- *    parameters:
- *      - in: path
- *        name: user_id  
- *        schema: 
- *          type: string
- *        required: true
- *        description: id of the user owner of the team
  *    responses:
  *      '200':
  *        description: Successful response
@@ -50,7 +45,7 @@ const teamsController = require('../controllers/teams.controller.js');
  *      '404':
  *        description: Not found
  */
-router.get('/:id', teamsController.getTeamByUserId);
+router.get('/', teamsController.getTeam);
 /**
  *  @swagger 
  * /teams:

@@ -15,4 +15,6 @@ getUserInfoFromToken = async (req) => {
     return response.data;
 }
 
-module.exports = getUserInfoFromToken
+module.exports = {
+    getUserInfoFromToken
+}
