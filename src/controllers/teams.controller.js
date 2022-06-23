@@ -50,7 +50,7 @@ async function findUserId(user_info){
             }else{
                 return db.query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) returning id', [
                     user_info.name, user_info.email, "auth0"
-                ])
+                ]).then((user) => user.rows[0].id)
             }
         }
     )
