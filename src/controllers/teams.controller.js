@@ -1,12 +1,13 @@
+const { response } = require('express');
 const db = require('../database');
 const getUserInfoFromToken = require('../utils/authInfo').getUserInfoFromToken;
 
 const getBestTeams = async(req, res) => {
     const response = await db.query('SELECT teams.id, teams.name AS team_name, teams.points, users.name AS team_owner FROM teams JOIN users on teams.user_id = users.id ORDER BY teams.points DESC');
-    if (response.rowCount<10){
+    if (response.rowCount<15){
         res.status(200).json(response.rows);
     }else{
-        res.status(200).json(response.rows.slice(0,10))
+        res.status(200).json(response.rows.slice(0,15))
     }
 }
 
@@ -27,6 +28,19 @@ const getTeam = async (req, res) => {
         res.status(404).json({
             error: err.message
         }); 
+    }
+}
+
+const getTeamById = async(req, res) => {
+    if (isNaN(req.params.id)){
+        res.status(400).json({error: 'invalid parameter.'}); 
+    }else{
+        const response = await db.query('SELECT teams.id, teams.name, teams.points, users.name AS owner FROM teams INNER JOIN users ON teams.user_id = users.id WHERE teams.id = $1',[req.params.id]);
+        if (response.rowCount>0){
+            res.status(200).json(response.rows[0]);
+        }else {
+            res.status(404).json({error: 'not found.'});
+        }
     }
 }
 
@@ -111,6 +125,7 @@ const deleteTeam = async (req, res) => {
 module.exports = {
     getBestTeams,
     getTeam,
+    getTeamById,
     createTeam,
     updateTeamName,
     deleteTeam

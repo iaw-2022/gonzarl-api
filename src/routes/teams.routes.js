@@ -37,7 +37,22 @@ const teamsController = require('../controllers/teams.controller.js');
  *      '200':
  *        description: Successful response
  *        schema:
- *          $ref: '#definitions/Team'
+ *          type: array
+ *          items:
+ *            type: object
+ *            properties:
+ *              id:
+ *                type: string
+ *                example: 6
+ *              team_name:
+ *                type: string
+ *                example: Equipazo
+ *              points:
+ *                type: integer
+ *                example: 25
+ *              team_owner:
+ *                type: string
+ *                example: Carlos Maslaton
  *      '404':
  *        description: Not found
  */
@@ -55,25 +70,49 @@ router.get('/best', teamsController.getBestTeams);
  *      '200':
  *        description: Successful response
  *        schema:
- *          type: array
- *          items:
- *            type: object
- *            properties:
- *              team_name:
- *                type: string
- *                example: Equipazo
- *              points:
- *                type: integer
- *                example: 25
- *              team_owner:
- *                type: string
- *                example: Carlos Maslaton
+ *          $ref: '#definitions/Team'
  *      '400':
  *        description: Invalid parameter
  *      '404':
  *        description: Not found
  */
 router.get('/', teamsController.getTeam);
+/**
+ * @swagger 
+ * /teams/{id}:
+ *  get: 
+ *    description: use to request a team
+ *    tags:
+ *      - Teams
+ *    parameters:
+ *      - in: path
+ *        name: id  
+ *        schema: 
+ *          type: string
+ *        required: true
+ *        description: id of the team
+ *    responses:
+ *      '200':
+ *        description: Successful response
+ *        schema:
+ *          type: object
+ *          properties:
+ *            id:
+ *              type: string
+ *              example: 6
+ *            name:
+ *              type: string
+ *              example: Equipazo
+ *            points:
+ *              type: integer
+ *              example: 25
+ *            owner:
+ *              type: string
+ *              example: Carlos Maslaton
+ *      '404':
+ *        description: Not found
+ */
+router.get('/:id', teamsController.getTeamById);
 /**
  *  @swagger 
  * /teams:
