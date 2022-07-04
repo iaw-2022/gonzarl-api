@@ -28,7 +28,7 @@ const teamsController = require('../controllers/teams.controller.js');
 
 /**
  * @swagger 
- * /teams/:
+ * /teams/best:
  *  get: 
  *    description: use to request the best teams ordered by points.
  *    tags:
