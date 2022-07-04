@@ -1,6 +1,15 @@
 const db = require('../database');
 const getUserInfoFromToken = require('../utils/authInfo').getUserInfoFromToken;
 
+const getBestTeams = async(req, res) => {
+    const response = await db.query('SELECT teams.id, teams.name AS team_name, teams.points, users.name AS team_owner FROM teams JOIN users on teams.user_id = users.id ORDER BY teams.points DESC');
+    if (response.rowCount<10){
+        res.status(200).json(response.rows);
+    }else{
+        res.status(200).json(response.rows.slice(0,10))
+    }
+}
+
 const getTeam = async (req, res) => {
     try{
         const user_info = await getUserInfoFromToken(req);
@@ -100,6 +109,7 @@ const deleteTeam = async (req, res) => {
 }
 
 module.exports = {
+    getBestTeams,
     getTeam,
     createTeam,
     updateTeamName,

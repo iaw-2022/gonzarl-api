@@ -30,6 +30,22 @@ const teamsController = require('../controllers/teams.controller.js');
  * @swagger 
  * /teams/:
  *  get: 
+ *    description: use to request the best teams ordered by points.
+ *    tags:
+ *      - Teams
+ *    responses:
+ *      '200':
+ *        description: Successful response
+ *        schema:
+ *          $ref: '#definitions/Team'
+ *      '404':
+ *        description: Not found
+ */
+router.get('/best', teamsController.getBestTeams);
+/**
+ * @swagger 
+ * /teams/:
+ *  get: 
  *    description: use to request the team for the user that logged in.
  *    security: 
  *       - bearerAuth: []
@@ -39,7 +55,19 @@ const teamsController = require('../controllers/teams.controller.js');
  *      '200':
  *        description: Successful response
  *        schema:
- *          $ref: '#definitions/Team'
+ *          type: array
+ *          items:
+ *            type: object
+ *            properties:
+ *              team_name:
+ *                type: string
+ *                example: Equipazo
+ *              points:
+ *                type: integer
+ *                example: 25
+ *              team_owner:
+ *                type: string
+ *                example: Carlos Maslaton
  *      '400':
  *        description: Invalid parameter
  *      '404':
